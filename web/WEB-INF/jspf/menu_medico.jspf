@@ -1,0 +1,36 @@
+<%@ page pageEncoding="UTF-8" %>
+<ul class="nav navbar-nav side-nav">
+    <li class="active">
+        <a href="home.jsp"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#pacientes"> Pacientes <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="pacientes" class="collapse">
+            <li>
+                <a data-url="paciente/paciente.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar</a>
+            </li>
+            <li>
+                <a data-url="paciente/listPacientes.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Buscar</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#consultas"> Consultas <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="consultas" class="collapse">
+            <li>
+                <a data-url="consulta/ListHistorialC.jsp" data-title="Registrar Consulta" href="#">&nbsp; Registrar</a>
+            </li>                            
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#ingresos">Hospitalización<i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="ingresos" class="collapse">
+            <li>
+                <a  data-url="ingresos/registroIngresos.jsp" data-title="Ingresos" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar</a>
+            </li>
+            <li>
+                <a data-url="ingresos/editarIngresos.jsp" data-title="Mantenimiento Ingresos" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
+            </li>                            
+        </ul>
+    </li>
+</ul>

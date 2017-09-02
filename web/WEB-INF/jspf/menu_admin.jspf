@@ -1,0 +1,76 @@
+<%@ page pageEncoding="UTF-8" %>
+<ul class="nav navbar-nav side-nav">
+    <li class="active">
+        <a href="home.jsp"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#pacientes"> Pacientes <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="pacientes" class="collapse">
+            <li>
+                <a data-url="paciente/paciente.jsp" data-title="Registrar Paciente" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar</a>
+            </li>
+            <li>
+                <a data-url="paciente/listPacientes.jsp" data-title="Buscar Paciente" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Buscar</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#consultas"> Consultas <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="consultas" class="collapse">
+            <li>
+                <a data-url="consulta/ListHistorialC.jsp" data-title="Registrar Consulta" href="#">&nbsp; Registrar</a>
+            </li>                            
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#medicos">Médicos <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="medicos" class="collapse">
+            <li>
+                <a data-url="medico/registrarMedico.jsp" data-title="Registrar Médico" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Médico</a>
+            </li>
+            <li>
+                <a data-url="medico/editarMedico.jsp" data-title="Mantenimiento Médico" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
+            </li>
+            <li>
+                <a data-url="medico/especialidad.jsp" data-title="Especialidades" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Especialidad</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#ingresos">Hospitalización<i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="ingresos" class="collapse">
+            <li>
+                <a  data-url="ingresos/registroIngresos.jsp" data-title="Ingresos" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Registrar</a>
+            </li>
+            <li>
+                <a data-url="ingresos/editarIngresos.jsp" data-title="Mantenimiento Ingresos" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Mantenimiento</a>
+            </li>                            
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#reportes">Reportes<i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="reportes" class="collapse">
+                <li>
+                <a data-url="consulta/listConsultas.jsp" data-title="Consultas" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Consultas</a>
+            </li>                            
+        </ul>
+        <a href="javascript:;" data-toggle="collapse" data-target="#inec">Inec<i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="inec" class="collapse">
+            <li>
+                <a  data-url="inec/ingresosInec.jsp" data-title="Ingresos" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Hospitalizaciones</a>
+            </li>                                                  
+            <li>
+                <a data-url="" data-title="Mantenimiento Ingresos" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; RAS</a>
+            </li>                            
+        </ul>
+        <a href="javascript:;" data-toggle="collapse" data-target="#establecimiento">Establecimiento<i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="establecimiento" class="collapse">
+            <li>
+                <a  data-url="configuracion/establecimiento.jsp" data-title="Ingresos" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Configuración</a>
+            </li>                            
+            <li>
+                <a data-url="configuracion/camasConf.jsp" data-title="Mantenimiento Ingresos" href="#"><i class="fa fa-address-book fa-fw" aria-hidden="true"></i>&nbsp; Camas</a>
+            </li>                                                        
+        </ul>
+    </li>
+</ul>
