@@ -1,5 +1,4 @@
 var $table = $('#table');
-start_page = true;
 $('#cboFilter').on('changed.bs.select', function (e) {
     newValue = $(this).val();
     $("#txt_filterPaciente").val("");
@@ -49,18 +48,10 @@ function load_newcaso(nombre, hc, sexo) {
     });
 }
 
-function loadPaginacion(total) {
-    $("#pagPacientes li a").not("[aria-label]").closest("li").remove();
-    li = '';
-    total = (total <= 10) ? total : 10;
-    for (var c = 0; c < total; c++) {
-        li += ('<li ' + ((c === 0) ? 'class="active"' : '') + ' ><a href="#">' + (c + 1) + '</a></li>');
-    }
-    $("#pagPacientes li").first().after(li);
-}
 defaultOpts = {
     totalPages: 1,
-    visiblePages: 4,
+    visiblePages: 5,
+    initiateStartPageClick: false,
     first: "|<",
     prev: "<<",
     next: ">>",
@@ -69,10 +60,9 @@ defaultOpts = {
         loadList(false, page);
     }
 };
-$('#pagination-demo').twbsPagination(defaultOpts);
+
 
 function loadList(bandera, pag) {
-    console.log("entro");
     txt_filter = $("#txt_filterPaciente").val();
     op_filter = $("#cboFilter").selectpicker("val");
     cantList = $("#cantList").val();
@@ -89,18 +79,13 @@ function loadList(bandera, pag) {
         },
         success: function (response) {
             var obj = $.parseJSON(response);
-            var tablePaciente = $("#tablePaciente tbody");
-            $totalPages = obj.count / cantList;
-            $totalPages = Math.ceil($totalPages);
             if (bandera) {
+                $totalPages = obj.count / cantList;
+                $totalPages = Math.ceil($totalPages);
                 $totalPages = ($totalPages === 0) ? 1 : ($totalPages);
-                //currentPage = (bandera) ? 1 : $('#pagination-demo').twbsPagination('getCurrentPage');
                 $('#pagination-demo').twbsPagination('destroy');
                 $('#pagination-demo').twbsPagination($.extend({}, defaultOpts, {
                     totalPages: $totalPages
-                            /*, onPageClick: function (event, page) {
-                             loadList(false, page);
-                             }*/
                 }));
             }
             $("#tablPaciente").bootstrapTable('load', obj.list);
@@ -121,11 +106,11 @@ function deletePaciente(idPaciente) {
 }
 
 $(function () {
-
-    //loadList(true, 1);
+    $('#pagination-demo').twbsPagination(defaultOpts);
+    loadList(true, 1);
     $("#tablPaciente").bootstrapTable('hideColumn', 'sexo');
     $("#tablPaciente").bootstrapTable('hideColumn', 'id');
-    
+
     $("#contenido").on("change", "#cantList", function () {
         loadList(true, 1);
     });
@@ -135,7 +120,6 @@ $(function () {
         } else if (e.keyCode === 13) {
             loadList(true, 1);
         }
+        
     });
 });
-
-
