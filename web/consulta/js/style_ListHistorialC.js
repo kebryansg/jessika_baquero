@@ -1,3 +1,24 @@
+pag_tbHC = ("#pag_tbHC");
+
+opts_pag_tbHC = {
+    totalPages: 1,
+    visiblePages: 5,
+    initiateStartPageClick: false,
+    first: "|<",
+    prev: "<<",
+    next: ">>",
+    last: ">|",
+    onPageClick: function (event, page) {
+        obtList(false, page);
+    }
+};
+
+$("#btn_paciente_reg").click(function () {
+    $("#contenido").load("paciente/paciente.jsp", function () {
+        $("#savePaciente").data("return", 1);
+    });
+});
+
 $("#tb_ViewHC").bootstrapTable({
     contextMenu: '#tb_ViewHC-context-menu',
     onContextMenuItem: function (row, $el) {
@@ -6,7 +27,6 @@ $("#tb_ViewHC").bootstrapTable({
                 $('#viewHistorialCaso').modal('toggle');
                 $('#viewHistorialCaso').on({
                     'hidden.bs.modal': function () {
-
                         $("#contenido").load("consulta/viewConsulta.jsp", function () {
                             editConsulta(row.id);
                         });
@@ -16,6 +36,7 @@ $("#tb_ViewHC").bootstrapTable({
         }
     }
 });
+
 $("#tbHC").bootstrapTable({
     contextMenu: '#tbHc-context-menu',
     onContextMenuItem: function (row, $el) {
@@ -30,34 +51,52 @@ $("#tbHC").bootstrapTable({
     }
 });
 
+$("#cboH_Caso").selectpicker();
+
 $.ajaxSetup({
     cache: false
 });
+
 $("#txt_filterHistorialC").keyup(function (e) {
     tecla = e.keyCode;
-    if (tecla === 13) {
-        obtList();
+    if (tecla === 8 && $(this).val() === "") {
+        obtList(true, 1);
+    } else if (tecla === 13) {
+        obtList(true, 1);
     }
 });
 
-
-function obtList() {
+function obtList(bandera, pag) {
+    cantList = $("#cboH_Caso").selectpicker("val");
     $.ajax({
         url: "sConsulta",
         data: {
             op: "list",
             idHc: $("#con_historiaPaciente").val(),
-            filter: $("#txt_filterHistorialC").val()
+            filter: $("#txt_filterHistorialC").val(),
+            top: cantList,
+            pag: ((pag - 1) * cantList)
         },
         dataType: 'json',
         type: 'POST',
         async: false,
         success: function (data) {
-            $("#tbHC").bootstrapTable("load", data);
+            if (bandera) {
+                $totalPages = data.total / cantList;
+                $totalPages = Math.ceil($totalPages);
+                $totalPages = ($totalPages === 0) ? 1 : ($totalPages);
+                $(pag_tbHC).twbsPagination('destroy');
+                $(pag_tbHC).twbsPagination($.extend({}, opts_pag_tbHC, {
+                    totalPages: $totalPages
+                }));
+            }
+
+            $("#tbHC").bootstrapTable("load", data.list);
             $('#tbHC').bootstrapTable('resetView');
         }
     });
 }
+
 function viewHistorialCaso(idCaso) {
     $.ajax({
         url: "sConsulta",
@@ -69,57 +108,37 @@ function viewHistorialCaso(idCaso) {
             op: "detCaso"
         },
         success: function (data) {
+            console.log(data);
             $("#viewHistorialCaso table").bootstrapTable('load', data);
         }
     });
     $('#viewHistorialCaso').modal("show");
 }
+
 function addHistorialCaso(idCaso) {
     nomPaciente = $("#con_nombrePaciente").val();
     hc = $("#con_historiaPaciente").val();
     sexo = $("#con_sexoPaciente").val();
-    load_newcaso(nomPaciente,hc,sexo);
-
-    /*$("#contenido").load("consulta/newConsulta.jsp", function () {
-        $("#PacienteId").val(nomPaciente);
-        $("#casoId").val(idCaso);
-        $("#PacienteId").attr("data-hc", hc);
-        if (sexo === "1") {
-            $("#div_femenino").hide();
-        }
-
-    });*/
+    load_newcaso(nomPaciente, hc, sexo);
 }
 
 $(function () {
 
-
     $("#pac_Delete").on("click", function (e) {
         limpiarDivPaciente();
-
     });
-
 
     $("#btnNewConsulta").click(function () {
         nomPaciente = $("#con_nombrePaciente").val();
         hc = $("#con_historiaPaciente").val();
         sexo = $("#con_sexoPaciente").val();
         if (hc !== "") {
-            load_newcaso(nomPaciente,hc,sexo);
-            /*$("#contenido").load("consulta/newConsulta.jsp", function () {
-                $("#PacienteId").val(nomPaciente);
-                $("#PacienteId").attr("data-hc", hc);
-                if (sexo === "1") {
-                    $("#div_femenino").hide();
-                    $(".sFemenino").closest("li").attr("class", "disabled");
-                } else {
-                    $(".sMasculino").closest("li").attr("class", "disabled");
-                }
-            });*/
+            load_newcaso(nomPaciente, hc, sexo);
         } else {
             alertify.success("Paciente no seleccionado...!");
         }
     });
+
     function load_newcaso(nombre, hc, sexo) {
         $("#contenido").load("consulta/newConsulta.jsp", function () {
             $("#PacienteId").val(nombre);
@@ -150,6 +169,7 @@ $(function () {
             load_Paciente(cod);
         }
     });
+    $(pag_tbHC).twbsPagination(opts_pag_tbHC);
 });
 
 function load_Paciente(cod) {
@@ -167,7 +187,7 @@ function load_Paciente(cod) {
                 $("#con_cedulaPaciente").val(ob.paciente.cedula);
                 $("#con_nombrePaciente").val((ob.paciente.apellido1 + " " + ob.paciente.apellido2 + " " + ob.paciente.nombre1 + " " + ob.paciente.nombre2).toUpperCase());
                 $("#con_sexoPaciente").val((ob.paciente.sexo) ? "1" : "0");
-                obtList();
+                obtList(true, 1);
             } else {
                 alertify.success("Paciente no encontrado");
             }
@@ -186,11 +206,9 @@ function modalListPaciente() {
             $("#con_nombrePaciente").val(row.nombres);
             $("#con_sexoPaciente").val(row.sexo);
             //alert(row.sexo);
-            obtList();
+            obtList(true, 1);
             $("#ListPaciente").modal("toggle");
         });
-
-
     });
 }
 
@@ -199,5 +217,7 @@ function limpiarDivPaciente() {
     $("#con_cedulaPaciente").val("");
     $("#con_nombrePaciente").val("");
     $("#con_ciudadPaciente").val("");
+    $("#txt_filterHistorialC").val("");
     $("#tbHC").bootstrapTable("removeAll");
+    $(pag_tbHC).twbsPagination(opts_pag_tbHC);
 }

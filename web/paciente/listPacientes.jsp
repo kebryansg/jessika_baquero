@@ -58,26 +58,13 @@
             <div class="col-md-12">
                 <div class="pull-right">
                     <ul id="pagination-demo" class="pagination-sm"></ul>
-                    <!--<ul id="pagPacientes" class="pagination">
-                        <li>
-                            <a href="#" aria-label="Anterior">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" aria-label="Siguiente">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>-->
                 </div>
-
             </div>
         </div>
     </div>
 
 </div>
-<script src="resources/js/configuracionInicial.js" type="text/javascript" ></script> 
+<!--<script src="resources/js/configuracionInicial.js" type="text/javascript" ></script>-->
 <script src="paciente/js/paciente.js" type="text/javascript"></script>
 <script src="paciente/js/styleListPaciente.js" type="text/javascript"></script>
 

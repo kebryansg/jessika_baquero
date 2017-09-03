@@ -32,6 +32,12 @@ $(function () {
         var id = $("#savePaciente").data("id");
         if (isNull(id)) {
             save();
+            if($("#savePaciente").data("return") === 1){
+                id_cedula = $("#savePaciente").data("id"),
+                $("#contenido").load("consulta/ListHistorialC.jsp",function(){
+                    load_Paciente(id_cedula);
+                });
+            }
         } else {
             editSave(id);
         }

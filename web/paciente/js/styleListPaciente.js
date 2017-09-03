@@ -106,6 +106,9 @@ function deletePaciente(idPaciente) {
 }
 
 $(function () {
+    
+    $("#cantList").selectpicker();
+    
     $('#pagination-demo').twbsPagination(defaultOpts);
     loadList(true, 1);
     $("#tablPaciente").bootstrapTable('hideColumn', 'sexo');

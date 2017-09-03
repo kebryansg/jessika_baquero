@@ -13,6 +13,7 @@ import mvc.controlador.entidades.sm.Caso;
 import mvc.controlador.entidades.sm.Consulta;
 import mvc.controlador.entidades.sm.HistorialClinico;
 import mvc.modelo.smDao.CasoDao;
+import test.list_count;
 
 public class CasoDaoImp implements CasoDao {
 
@@ -64,32 +65,36 @@ public class CasoDaoImp implements CasoDao {
     }
 
     @Override
-    public List<Consulta> listConsulta(int idHistoriaC, String fechaInicial, String fechaFinal, String filter, int pag, int top) {
+    public list_count listConsulta(int idHistoriaC, String filter, int pag, int top) {
         this.conn = con_db.open(con_db.MSSQL_SM);
-        List<Consulta> list = new ArrayList<>();
-        String paginacion = (top != -1) ? "OFFSET " + pag + " ROWS FETCH NEXT " + top + " ROWS ONLY;" : "";
-        String fecha = (!fechaFinal.equals("")) ? "(co.fecha < '" + fechaFinal + "' and co.fecha > '" + fechaInicial + "') and" : "";
-        String sql = ("select co.idCaso casoId, min(co.fecha) fecha,(select top 1 con.diagnostico from consulta con where con.idCaso = co.idCaso ORDER by fecha asc) motivo from consulta co inner join dbo.caso ca on co.idCaso = ca.id inner join dbo.historialClinico hc on hc.id = ca.idHistorialClinico where hc.id = '" + idHistoriaC + "' AND "
-                + fecha
-                + " (co.motivo like '%" + filter + "%' or co.diagnostico like '%" + filter + "%' or co.prescripcion like '%" + filter + "%' or co.sintomas like '%" + filter + "%')"
-                + " GROUP by co.idCaso "
-                + " ORDER BY fecha desc " + paginacion);
-        System.out.println(sql);
-        ResultSet rs = this.conn.query(sql);
+        list_count l = new list_count();
+        List<String> list = new ArrayList<>();
+        String sql = "{call dbo.viewCaso(?,?,?,?)}";
         try {
+            CallableStatement call = this.conn.getConexion().prepareCall(sql);
+            call.setInt("trows", top);
+            call.setInt("inicio", pag);
+            call.setInt("hc", idHistoriaC);
+            System.out.println("\"" + (filter.equals("") ? "*" : filter + "*") + "\"");
+            call.setString("buscar", "\"" + (filter.equals("") ? "*" : filter + "*") + "\"");
+            ResultSet rs = call.executeQuery();
             while (rs.next()) {
-                Consulta value = new Consulta(0);
-                value.setMotivo(rs.getString("motivo"));
-                value.setFecha(rs.getDate("fecha"));
-                value.setIdCaso(new Caso(rs.getInt("casoId"), idHistoriaC));
-                list.add(value);
+                l.setTotal(rs.getInt("full_count"));
+                list.add("{"
+                        + "\"caso\" : \" " + rs.getInt("caso") + " \", "
+                        + "\"fecha\" : \" " + test.test.SQLSave(rs.getDate("fecha")) + " \", "
+                        + "\"diagnostico\" : \" " + rs.getString("diagnostico") + " \", "
+                        + "\"especialidad\" : \" " + rs.getString("especialidad") + " \", "
+                        + "\"tipoConsulta\" : \" " + rs.getString("tipoConsulta") + " \" "
+                        + "}");
             }
+            l.setList(list);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } finally {
             this.conn.close();
         }
-        return list;
+        return l;
     }
 
     @Override

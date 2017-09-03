@@ -116,7 +116,7 @@ public class PacienteDaoImp implements PacienteDao {
         this.conn = con_db.open(con_db.MSSQL_IP);
         try {
 
-            CallableStatement call = this.conn.getConexion().prepareCall("{call dbo.savePaciente(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            CallableStatement call = this.conn.getConexion().prepareCall("{call dbo.savePaciente(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 
             call.setInt("id", value.getId());
             call.setString("cedula", value.getCedula());
@@ -124,6 +124,7 @@ public class PacienteDaoImp implements PacienteDao {
             call.setString("nombre2", value.getNombre2());
             call.setString("apellido1", value.getApellido1());
             call.setString("apellido2", value.getApellido2());
+            call.setString("nombres", value.getNombres());
             call.setString("domicilio", value.getDomicilio());
             call.setString("nacionalidad", value.getNacionalidad());
             //call.setString("ciudad", value.getCiudad());
@@ -269,7 +270,7 @@ public class PacienteDaoImp implements PacienteDao {
                 value.setFechaNacimiento(rs.getDate("fechaNacimiento"));
                 value.setId(rs.getInt("id"));
                 value.setIdParroquia(new Parroquia(rs.getInt("idParroquia")));
-                value.setImagen(rs.getNString("imagen"));
+                //value.setImagen(rs.getNString("imagen"));
                 //value.setLugarNacimiento(rs.getNString("lugarNacimiento"));
                 value.setNacionalidad(rs.getString("nacionalidad"));
                 value.setPaisNacimiento(rs.getNString("paisNacimiento"));

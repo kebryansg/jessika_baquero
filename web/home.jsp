@@ -208,7 +208,7 @@
         <!-- /.col-sm-4 -->
     </body>
     <script type="text/javascript">
-        //$("#contenido").load("consulta/viewConsulta.jsp");
+        $("#contenido").load("consulta/ListHistorialC.jsp");
     </script>
     <script type="text/javascript" src="usuario/login.js"></script>
 </html>

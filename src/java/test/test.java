@@ -84,7 +84,7 @@ public class test {
         for (int i = (elem.length - 1); i >= 0; i--) {
             elem_r[indice++] = elem[i];
         }
-        System.out.println(String.join(" near ", elem) + " or " + String.join(" near ", elem_r));
+        //System.out.println(String.join(" near ", elem) + " or " + String.join(" near ", elem_r));
         return String.join(" near ", elem) + " or " + String.join(" near ", elem_r);
     }
 

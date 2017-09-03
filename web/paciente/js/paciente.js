@@ -211,6 +211,7 @@ function save() {
                     case "ok":
                         alertify.success("Paciente Registrado");
                         limpiarPaciente();
+                        $("#savePaciente").data("id", response.id);
                         break;
                     case "cedula":
                         alertify.success("Cedula repetida...!");
@@ -346,7 +347,7 @@ function limpiarPaciente() {
 function moment() {
     // Informacion basica
     $("#tabPacientes input[validate='text'],input[validate='fecha_mask'],textarea[validate='text'],input[validate='cedula']").val("");
-    
+
     $("#tabPacientes select[validate='select']").selectpicker("val", 0);
     $('#pac_nacionalidad').selectpicker("val", 1);
     $("#pac_PaisNac").val("Ecuador");
@@ -359,16 +360,16 @@ function moment() {
     $('.remove-example').selectpicker('refresh');
 
     $("#tabPacientes #pac_Discapacidad").selectpicker("val", 1);
-    
+
     $("#pac_nombreContacto").val("");
     $("#cboParentezco").selectpicker("val", 0);
     $("#pac_movilContacto").val("");
-    
+
     change_Genero($('#pac_Genero'));
     // Antecedentes
     // Obstetricia
     $("input[type='number']").val(0);
     $("#tabObstetricia").data("id", 0);
-    var utc = new Date().toJSON().slice(0,10);//.replace(/-/g,'/');
+    var utc = new Date().toJSON().slice(0, 10);//.replace(/-/g,'/');
     $("#pac_FPP").val(utc);
 }

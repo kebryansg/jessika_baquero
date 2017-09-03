@@ -110,6 +110,7 @@ public class sConsulta extends HttpServlet {
         Gson gson = new GsonBuilder().setDateFormat(FORMATO_FECHA).create();
         String result = "";
         String op = request.getParameter("op");
+        int tops = 0, pag = 0;
 
         list_count l = new list_count();
         List<String> resultList = new ArrayList();
@@ -144,9 +145,10 @@ public class sConsulta extends HttpServlet {
 
                 break;
             case "adminConsultas":
-                int tops = Integer.parseInt(request.getParameter("top")),
-                 pag = Integer.parseInt(request.getParameter("pag")),
-                 idHC = Integer.parseInt(request.getParameter("idHC")),
+
+                tops = Integer.parseInt(request.getParameter("top"));
+                pag = Integer.parseInt(request.getParameter("pag"));
+                int idHC = Integer.parseInt(request.getParameter("idHC")),
                  idTipoConsulta = Integer.parseInt(request.getParameter("idTipoConsulta")),
                  opTiempo = Integer.parseInt(request.getParameter("opTiempo"));
 
@@ -198,7 +200,13 @@ public class sConsulta extends HttpServlet {
                 out.close();
                 break;
             case "detCaso":
-                List<Consulta> list_detCaso = new CasoDaoImp().listDetConsulta(Integer.parseInt(request.getParameter("caso")));
+                int caso = 0;
+                try {
+                    caso = Integer.parseInt(request.getParameter("caso").toString().trim());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                List<Consulta> list_detCaso = new CasoDaoImp().listDetConsulta(caso);
                 for (Consulta consulta : list_detCaso) {
                     resultList.add("{"
                             + "\"id\" : \"" + consulta.getId() + "\","
@@ -210,6 +218,7 @@ public class sConsulta extends HttpServlet {
                             + "}");
 
                 }
+                System.out.println("[" + String.join(",", resultList) + "]");
                 out.print("[" + String.join(",", resultList) + "]");
                 out.flush();
                 out.close();
@@ -225,15 +234,10 @@ public class sConsulta extends HttpServlet {
                 out.close();
                 break;
             case "list":
-                List<Consulta> list = new CasoDaoImp().listConsulta(Integer.parseInt(request.getParameter("idHc")), "", "", request.getParameter("filter"), 0, 20);
-                for (Consulta con : list) {
-                    resultList.add("{"
-                            + "\"caso\": \"" + con.getIdCaso().getId() + "\","
-                            + "\"fecha\": \"" + test.SQLSave(con.getFecha()) + "\","
-                            + "\"motivo\": \"" + con.getMotivo() + "\""
-                            + "}");
-                }
-                out.print("[" + String.join(",", resultList) + "]");
+                tops = Integer.parseInt(request.getParameter("top"));
+                pag = Integer.parseInt(request.getParameter("pag"));
+                l = new CasoDaoImp().listConsulta(Integer.parseInt(request.getParameter("idHc")), request.getParameter("filter"), pag, tops);
+                out.print("{\"list\" : [" + String.join(",", (List<String>) l.getList()) + "], \"total\" : " + l.getTotal() + "}");
                 out.flush();
                 out.close();
                 break;
