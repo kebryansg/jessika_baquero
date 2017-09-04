@@ -1,5 +1,4 @@
 $(function () {
-    editConsulta(75998);
     $("#btnCancelarViewConsulta").click(function () {
         hc = $("#PacienteId").attr("data-hc");
         $("#contenido").load("consulta/ListHistorialC.jsp", function () {
@@ -76,8 +75,8 @@ function editConsulta(id) {
             asignarConsuta(data.consulta);
             asginarSV(data.sv, data.sexoP);
 
-            listEstudiosLabs(data.estl);
-            listEstudiosImgs(data.esti);
+            //listEstudiosLabs(data.estl);
+            //listEstudiosImgs(data.esti);
 
             $("#PacienteId").val(data.paciente);
             $("#PacienteId").attr("data-hc", data.consulta.idCaso.idHistorialClinico.id);

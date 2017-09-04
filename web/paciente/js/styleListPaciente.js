@@ -1,5 +1,5 @@
 var $table = $('#table');
-
+cont_vacio = 0;
 $('#cboFilter').on('changed.bs.select', function (e) {
     newValue = $(this).val();
     $("#txt_filterPaciente").val("");
@@ -64,6 +64,7 @@ defaultOpts = {
 
 
 function loadList(bandera, pag) {
+    ojb_return = null;
     txt_filter = $("#txt_filterPaciente").val();
     op_filter = $("#cboFilter").selectpicker("val");
     cantList = $("#cantList").val();
@@ -71,6 +72,7 @@ function loadList(bandera, pag) {
         url: 'sPaciente',
         type: 'POST',
         async: false,
+        dataType: 'json',
         data: {
             filter: txt_filter,
             top: cantList,
@@ -78,21 +80,24 @@ function loadList(bandera, pag) {
             op_filter: op_filter,
             op: 'list_filter'
         },
-        success: function (response) {
-            var obj = $.parseJSON(response);
+        success: function (obj) {
+            $totalPages = obj.count / cantList;
+            $totalPages = Math.ceil($totalPages);
+            $totalPages = ($totalPages === 0) ? 1 : ($totalPages);
             if (bandera) {
-                $totalPages = obj.count / cantList;
-                $totalPages = Math.ceil($totalPages);
-                $totalPages = ($totalPages === 0) ? 1 : ($totalPages);
-                $('#pagination-demo').twbsPagination('destroy');
-                $('#pagination-demo').twbsPagination($.extend({}, defaultOpts, {
-                    totalPages: $totalPages
-                }));
+                modif_Paginacion($totalPages);
             }
             $("#tablPaciente").bootstrapTable('load', obj.list);
             $('#tablPaciente').bootstrapTable('resetView');
         }
     });
+}
+function modif_Paginacion(total) {
+    $('#pagination-demo').twbsPagination('destroy');
+    console.log(defaultOpts);
+    $('#pagination-demo').twbsPagination($.extend({}, defaultOpts, {
+        totalPages: total
+    }));
 }
 
 function editPaciente(idPaciente) {
@@ -118,13 +123,22 @@ $(function () {
     $("#contenido").on("change", "#cantList", function () {
         loadList(true, 1);
     });
+
     $("#contenido").on("keyup", "#txt_filterPaciente", function (e) {
-        if (!$.isEmptyObject($(this).val())) {
-            if (e.keyCode === 8 && $(this).val() === "") {
+        switch (e.keyCode) {
+            case 8:
+                if ($.isEmptyObject($(this).val()) && cont_vacio === 0) {
+                    cont_vacio = 1;
+                    loadList(true, 1);
+                }
+                break;
+            case 13:
+                cont_vacio = 0;
                 loadList(true, 1);
-            } else if (e.keyCode === 13) {
-                loadList(true, 1);
-            }
+                break;
+            default :
+                cont_vacio = 0;
+                break;
         }
     });
 });

@@ -191,9 +191,10 @@ public class sConsulta extends HttpServlet {
                 String metodo_causa = (String.valueOf(value.getIdTipoConsulta()).equals("1")) ? new CausaDaoImp().edit(value.getIdMetodo()).getDescripcion() : new MetodosDaoImp().edit_detMetodos(value.getIdMetodo()).getDescripcion();
 
                 SignosVitales s_v = new SignosVitalesDaoImp().editar(value.getId());
-                String x = gson.toJson(new ConsultaEstudiosImagenDaoImp().list(value.getId()));
-                String y = gson.toJson(new ConsultaEstudiosLabsDaoImp().list(value.getId()));
-                String respuesta = ("{ \"esti\": " + x + " ,  \"estl\" : " + y + " , \"sv\": " + gson.toJson(s_v) + ",  \"consulta\": " + gson.toJson(value) + ", \"paciente\" : \"" + p.getNombres() + "\", \"sexoP\" : \"" + (p.getSexo().equals("1") ? "H" : "M") + "\" ,\"tipoConsulta\" : \"" + tipoConsulta + "\",\"metodo_causa\" : \"" + metodo_causa + "\"  }");
+                String respuesta = ("{ \"sv\": " + gson.toJson(s_v) + ",  \"consulta\": " + gson.toJson(value) + ", \"paciente\" : \"" + p.getNombres() + "\", \"sexoP\" : \"" + (p.getSexo().equals("1") ? "H" : "M") + "\" ,\"tipoConsulta\" : \"" + tipoConsulta + "\",\"metodo_causa\" : \"" + metodo_causa + "\"  }");
+                //String x = gson.toJson(new ConsultaEstudiosImagenDaoImp().list(value.getId()));
+                //String y = gson.toJson(new ConsultaEstudiosLabsDaoImp().list(value.getId()));
+                //String respuesta = ("{ \"esti\": " + x + " ,  \"estl\" : " + y + " , \"sv\": " + gson.toJson(s_v) + ",  \"consulta\": " + gson.toJson(value) + ", \"paciente\" : \"" + p.getNombres() + "\", \"sexoP\" : \"" + (p.getSexo().equals("1") ? "H" : "M") + "\" ,\"tipoConsulta\" : \"" + tipoConsulta + "\",\"metodo_causa\" : \"" + metodo_causa + "\"  }");
 
                 out.print(respuesta);
                 out.flush();

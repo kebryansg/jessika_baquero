@@ -143,7 +143,8 @@
                                 </div>-->
                                 <div id="contenido" class="panel-body">
                                     <!-- /. ROW  -->
-                                    <div class="row">
+                                    
+                                    <!--<div class="row">
                                         <div class="col-md-3 col-sm-6 col-xs-6">           
                                             <div class="panel panel-back noti-box">
                                                 <span class="icon-box bg-color-red set-icon">
@@ -188,7 +189,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     
                                 </div>
                                 <!-- /.col-sm-4 -->
