@@ -53,10 +53,10 @@ defaultOpts = {
     totalPages: 1,
     visiblePages: 5,
     initiateStartPageClick: false,
-    first: "|<",
-    prev: "<<",
-    next: ">>",
-    last: ">|",
+    first: "&larrb;",
+    prev: "&laquo;",
+    next: "&raquo;",
+    last: "&rarrb;",
     onPageClick: function (event, page) {
         loadList(false, page);
     }

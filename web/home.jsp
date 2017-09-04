@@ -19,7 +19,6 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
         <!-- Custom CSS -->
         <link href="resources/bootstrap/css/sb-admin.css" rel="stylesheet">
         <link href="resources/css/style_home.css" rel="stylesheet" type="text/css"/>
@@ -190,7 +189,7 @@
                                             </div>
                                         </div>
                                     </div>-->
-                                    
+
                                 </div>
                                 <!-- /.col-sm-4 -->
 
@@ -210,7 +209,6 @@
         <!-- /.col-sm-4 -->
     </body>
     <script type="text/javascript">
-        //consulta/ListHistorialC
         $("#contenido").load("consulta/ListHistorialC.jsp");
     </script>
     <script type="text/javascript" src="usuario/login.js"></script>

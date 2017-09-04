@@ -1,13 +1,13 @@
 pag_tbHC = ("#pag_tbHC");
-
+cont_vacio = 0;
 opts_pag_tbHC = {
     totalPages: 1,
     visiblePages: 5,
     initiateStartPageClick: false,
-    first: "|<",
-    prev: "<<",
-    next: ">>",
-    last: ">|",
+    first: "&larrb;",
+    prev: "&laquo;",
+    next: "&raquo;",
+    last: "&rarrb;",
     onPageClick: function (event, page) {
         obtList(false, page);
     }
@@ -52,12 +52,24 @@ $.ajaxSetup({
 });
 
 $("#txt_filterHistorialC").keyup(function (e) {
-    tecla = e.keyCode;
-    if (tecla === 8 && $(this).val() === "") {
-        obtList(true, 1);
-    } else if (tecla === 13) {
-        obtList(true, 1);
+    switch (e.keyCode) {
+        case 8:
+            if ($.isEmptyObject($(this).val()) && cont_vacio === 0) {
+                cont_vacio = 1;
+                obtList(true, 1);
+            }
+            break;
+        case 13:
+            cont_vacio = 0;
+            obtList(true, 1);
+            break;
+        default :
+            cont_vacio = 0;
+            break;
     }
+
+
+
 });
 
 function obtList(bandera, pag) {
