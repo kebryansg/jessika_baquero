@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $('.form_date').datetimepicker('update', new Date());
 
     $("#cboTipoConsulta").on("changed.bs.select", function (e) {
@@ -229,7 +228,6 @@ function obtenerEstudiosLab() {
     estArreglo = [];
     $.each(est, function (i, item) {
         estArreglo.push(est[i].id);
-        //alert(est[i].id);
     });
     return estArreglo;
 }

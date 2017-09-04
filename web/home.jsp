@@ -6,15 +6,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-
         <title>Jessika 3.0</title>
 
         <!-- Bootstrap Core CSS -->
@@ -40,7 +37,6 @@
         <script src="resources/bootstrap/table/bootstrap-table.min.js" type="text/javascript"></script>
         <script src="resources/bootstrap/table/bootstrap-table-contextmenu.js" type="text/javascript"></script>
         <script src="resources/bootstrap/table/locale/bootstrap-table-es-ES.min.js" type="text/javascript"></script>
-
         <!--    desde aqui mis links -->
 
         <script type="text/javascript" src="resources/js/moment.js" async="async"></script>
@@ -142,53 +138,6 @@
                                 </div>-->
                                 <div id="contenido" class="panel-body">
                                     <!-- /. ROW  -->
-                                    
-                                    <!--<div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-6">           
-                                            <div class="panel panel-back noti-box">
-                                                <span class="icon-box bg-color-red set-icon">
-                                                    <i class="fa fa-envelope-o"></i>
-                                                </span>
-                                                <div class="text-box" >
-                                                    <p class="main-text">120</p>
-                                                    <p class="text-muted">Pacientes</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-6">           
-                                            <div class="panel panel-back noti-box">
-                                                <span class="icon-box bg-color-green set-icon">
-                                                    <i class="fa fa-bars"></i>
-                                                </span>
-                                                <div class="text-box" >
-                                                    <p class="main-text">30 </p>
-                                                    <p class="text-muted">Consultas</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-6">           
-                                            <div class="panel panel-back noti-box">
-                                                <span class="icon-box bg-color-blue set-icon">
-                                                    <i class="fa fa-bell-o"></i>
-                                                </span>
-                                                <div class="text-box" >
-                                                    <p class="main-text">240 </p>
-                                                    <p class="text-muted">Hospitaliaciones</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-6">           
-                                            <div class="panel panel-back noti-box">
-                                                <span class="icon-box bg-color-brown set-icon">
-                                                    <i class="glyphicon glyphicon-user"></i>
-                                                </span>
-                                                <div class="text-box" >
-                                                    <p class="main-text">3</p>
-                                                    <p class="text-muted">Usuarios</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
 
                                 </div>
                                 <!-- /.col-sm-4 -->

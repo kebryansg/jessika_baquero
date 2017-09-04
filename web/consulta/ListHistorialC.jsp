@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--<i class="glyphicon glyphicon-plus"></i>-->
 <div class="container-fluid">
     <div class="row">
         <div class="form-group col-md-2">
@@ -127,19 +126,4 @@
         </div>
     </div>
 </div>
-<!--<script src="resources/js/configuracionInicial.js" type="text/javascript"></script>-->
 <script src="consulta/js/style_ListHistorialC.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-
-    /*$('#grid').bootstrapTable({
-     contextMenu: '#context-menu',
-     onContextMenuItem: function(row, $el){
-     if($el.data("item") == "edit"){
-     alert(row.itemid);
-     }
-     }
-     });*/
-
-
-</script>

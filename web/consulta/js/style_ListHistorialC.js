@@ -16,7 +16,6 @@ $("#tbHC").on("click", "button[name='btnHCaso']", function () {
     viewHistorialCaso($(this).attr("data-id"));
 });
 $("#tbHC").on("click", "button[name='btnNewConsulta']", function () {
-
     addHistorialCaso($(this).attr("data-id"));
 });
 
@@ -135,7 +134,7 @@ function addHistorialCaso(idCaso) {
     nomPaciente = $("#con_nombrePaciente").val();
     hc = $("#con_historiaPaciente").val();
     sexo = $("#con_sexoPaciente").val();
-    load_newcaso(nomPaciente, hc, sexo);
+    load_newcaso(nomPaciente, hc, sexo, idCaso);
 }
 
 $(function () {
@@ -149,16 +148,17 @@ $(function () {
         hc = $("#con_historiaPaciente").val();
         sexo = $("#con_sexoPaciente").val();
         if (hc !== "") {
-            load_newcaso(nomPaciente, hc, sexo);
+            load_newcaso(nomPaciente, hc, sexo, 0);
         } else {
             alertify.success("Paciente no seleccionado...!");
         }
     });
 
-    function load_newcaso(nombre, hc, sexo) {
+    function load_newcaso(nombre, hc, sexo, idCaso) {
         $("#contenido").load("consulta/newConsulta.jsp", function () {
             $("#PacienteId").val(nombre);
             $("#PacienteId").attr("data-hc", hc);
+            $("#casoId").val(idCaso);
             if (sexo === "1") {
                 $("#div_femenino").hide();
                 $(".sFemenino").closest("li").attr("class", "disabled");
@@ -202,7 +202,7 @@ function load_Paciente(cod) {
                 $("#con_historiaPaciente").val(ob.hc_id);
                 $("#con_cedulaPaciente").val(ob.paciente.cedula);
                 $("#con_nombrePaciente").val((ob.paciente.apellido1 + " " + ob.paciente.apellido2 + " " + ob.paciente.nombre1 + " " + ob.paciente.nombre2).toUpperCase());
-                $("#con_sexoPaciente").val((ob.paciente.sexo) ? "1" : "0");
+                $("#con_sexoPaciente").val(ob.paciente.sexo);
                 obtList(true, 1);
             } else {
                 alertify.success("Paciente no encontrado");

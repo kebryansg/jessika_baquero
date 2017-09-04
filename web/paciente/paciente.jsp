@@ -368,6 +368,5 @@
         </div>
     </div>
 </div>
-<!--<script src="resources/js/configuracionInicial.js" type="text/javascript" ></script> -->
 <script src="paciente/js/paciente.js" type="text/javascript"></script>
 <script src="paciente/js/stylePaciente.js" type="text/javascript"></script>

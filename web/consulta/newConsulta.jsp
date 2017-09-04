@@ -5,21 +5,14 @@
 <!DOCTYPE html>
 <div class="contenedor-tabs">
     <div class="container-fluid" id="consulta_div">
-        <div class="row">
+        <!--<div class="row hidden">
             <div class="col-md-12">
                 <div class="pull-right form-group">
                     <button class="btn btn-info" id="btnCancelarConsulta">Cancelar</button>
                     <button class="btn btn-info" id="btnGuardarConsulta">Guardar</button>
                 </div>
-
-                <div class="pull-left form-group">
-                    <div class="form-inline">
-
-                    </div>
-                </div>
             </div>
-        </div>
-        <hr>
+        </div>-->
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
@@ -84,6 +77,12 @@
                     <span class="help-block" data-exonerado>0 Estudios Img.</span>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="pull-right form-group">
+                    <button class="btn btn-danger" id="btnCancelarConsulta">Cancelar</button>
+                    <button class="btn btn-info" id="btnGuardarConsulta">Guardar</button>
+                </div>
+            </div>
 
         </div>
         <div class="row">
@@ -119,7 +118,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="" id="sv_id" hidden data-id="0">
+            <div class="" id="sv_id"  data-id="0">
                 <div class="form-group col-md-2">
                     <label class="form-control-label">Peso:</label>
                     <input  type="text" class="form-control " placeholder="kg - lb" id="sv_Peso">

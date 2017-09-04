@@ -31,14 +31,15 @@ $("#tablPaciente").bootstrapTable({
                 deletePaciente(row.id);
                 break;
             case "new_consulta":
-                load_newcaso(row.nombres, row.hc, row.sexo);
+                load_newcaso(row.nombres, row.hc, row.sexo,0);
                 break;
         }
     }
 });
-function load_newcaso(nombre, hc, sexo) {
+function load_newcaso(nombre, hc, sexo,idCaso) {
     $("#contenido").load("consulta/newConsulta.jsp", function () {
         $("#PacienteId").val(nombre);
+        $("#casoId").val(idCaso);
         $("#PacienteId").attr("data-hc", hc);
         if (sexo === "1") {
             $("#div_femenino").hide();
