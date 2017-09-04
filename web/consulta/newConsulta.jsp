@@ -74,7 +74,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3 ">
+            <div class="col-md-3 hidden">
                 <div class="form-group has-error" id="showLabs">
                     <button class="btn btn-danger" onclick="openModal('estLab')">Estudios Laboratorios.</button>
                     <span class="help-block" data-exonerado> 0 Estudios Lab.</span>
@@ -119,7 +119,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="" id="sv_id" data-id="0">
+            <div class="" id="sv_id" hidden data-id="0">
                 <div class="form-group col-md-2">
                     <label class="form-control-label">Peso:</label>
                     <input  type="text" class="form-control " placeholder="kg - lb" id="sv_Peso">

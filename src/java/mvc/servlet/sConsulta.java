@@ -200,17 +200,12 @@ public class sConsulta extends HttpServlet {
                 out.close();
                 break;
             case "detCaso":
-                int caso = 0;
-                try {
-                    caso = Integer.parseInt(request.getParameter("caso").toString().trim());
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
+                int caso = Integer.parseInt(request.getParameter("caso").toString().trim());
                 List<Consulta> list_detCaso = new CasoDaoImp().listDetConsulta(caso);
                 for (Consulta consulta : list_detCaso) {
                     resultList.add("{"
                             + "\"id\" : \"" + consulta.getId() + "\","
-                            + "\"caso\" : \"" + consulta.getIdCaso().getId() + "\","
+                            /*+ "\"caso\" : \"" + consulta.getIdCaso().getId() + "\","*/
                             + "\"fecha\" : \"" + consulta.getFecha() + "\","
                             + "\"tipo\" : \"" + consulta.getSintoma() + "\","
                             + "\"motivo\" : \"" + consulta.getMotivo() + "\","

@@ -131,6 +131,7 @@
             <div id="page-wrapper">
 
                 <div class="container-fluid">
+                    <i class="glyphicon glyphicon-align-justify"></i>
 
                     <!-- Page Heading -->
 
@@ -208,6 +209,7 @@
         <!-- /.col-sm-4 -->
     </body>
     <script type="text/javascript">
+        //consulta/ListHistorialC
         $("#contenido").load("consulta/ListHistorialC.jsp");
     </script>
     <script type="text/javascript" src="usuario/login.js"></script>

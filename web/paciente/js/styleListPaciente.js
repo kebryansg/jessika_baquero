@@ -1,4 +1,5 @@
 var $table = $('#table');
+
 $('#cboFilter').on('changed.bs.select', function (e) {
     newValue = $(this).val();
     $("#txt_filterPaciente").val("");
@@ -106,9 +107,9 @@ function deletePaciente(idPaciente) {
 }
 
 $(function () {
-    
+
     $("#cantList").selectpicker();
-    
+
     $('#pagination-demo').twbsPagination(defaultOpts);
     loadList(true, 1);
     $("#tablPaciente").bootstrapTable('hideColumn', 'sexo');
@@ -118,11 +119,13 @@ $(function () {
         loadList(true, 1);
     });
     $("#contenido").on("keyup", "#txt_filterPaciente", function (e) {
-        if (e.keyCode === 8 && $(this).val() === "") {
-            loadList(true, 1);
-        } else if (e.keyCode === 13) {
-            loadList(true, 1);
+        if (!$.isEmptyObject($(this).val())) {
+            if (e.keyCode === 8 && $(this).val() === "") {
+                loadList(true, 1);
+            } else if (e.keyCode === 13) {
+                loadList(true, 1);
+            }
         }
-        
     });
 });
+

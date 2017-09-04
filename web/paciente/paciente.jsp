@@ -65,11 +65,6 @@
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Fecha Nac. </label>
                                     <div class="col-md-8">
-                                        <!--<input class="form-control" id="pac_FechaNac" type="text">-->
-                                        <!--<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd">
-                                            <input class="form-control" validate="date" id="pac_FechaNac" size="16" type="text" value="" readonly>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>-->
                                         <input class="date-mask form-control" validate="fecha_mask" placeholder="Fecha nacimiento" data-inputmask="'alias': 'yyyy-mm-dd'" id="pac_FechaNac"/>
                                     </div>
                                 </div>
@@ -104,8 +99,8 @@
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Estado civil </label>
                                     <div class="col-md-8">
-                                        <select class="form-control selectpicker" validate="select" id="pac_EstadoCivil">
-                                            <option value="0">Seleccione</option>
+                                        <select class="form-control selectpicker"  id="pac_EstadoCivil">
+                                            <!--<option value="0">Seleccione</option>-->
                                             <option value="1">Soltero</option>
                                             <option value="2">Casado</option>
                                             <option value="3">Divorciado</option>
@@ -117,8 +112,8 @@
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Etnia </label>
                                     <div class="col-md-8">
-                                        <select class="form-control selectpicker" validate="select" id="pac_Etnia">
-                                            <option value="0">Seleccione</option>
+                                        <select class="form-control selectpicker" id="pac_Etnia">
+                                            <!--<option value="0">Seleccione</option>-->
                                             <option value="1">Indigena</option>
                                             <option value="2">Afroecuatoriano</option>
                                             <option value="3">Negro(a)</option>
@@ -133,8 +128,8 @@
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Género </label>
                                     <div class="col-md-8">
-                                        <select class="form-control selectpicker" validate="select" id="pac_Genero">
-                                            <option value="0">Seleccione</option>
+                                        <select class="form-control selectpicker"  id="pac_Genero">
+                                            <!--<option value="0">Seleccione</option>-->
                                             <option value="1">Masculino</option>
                                             <option value="2">Femenino</option>
                                             <option value="3">Indeterminado</option>
@@ -144,8 +139,8 @@
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Nacionalidad </label>
                                     <div class="col-md-8">
-                                        <select class="form-control selectpicker" validate="select" id="pac_nacionalidad">
-                                            <option value="0">Seleccione</option>
+                                        <select class="form-control selectpicker"  id="pac_nacionalidad">
+                                            <!--<option value="0">Seleccione</option>-->
                                             <option value="1">Ecuatoriano</option>
                                             <option value="2">Extranjero</option>
                                         </select>
@@ -154,27 +149,14 @@
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Pais Nac. </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" validate="text"  id="pac_PaisNac" placeholder="Pais Nacimiento">
+                                        <input type="text" class="form-control" validate="text"  id="pac_PaisNac" value="Ecuador" placeholder="Pais Nacimiento">
                                     </div>
                                 </div>
-
-                                <!--<div class="form-group">
-                                    <label for="inputUserName" class="control-label col-md-3">Cuidad </label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" validate="text"  id="pac_Ciudad" placeholder="Ciudad">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUserName" class="control-label col-md-3">Lugar Nac. </label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" validate="text"  id="pac_LugarNac" placeholder="Lugar Nacimiento">
-                                    </div>
-                                </div>-->
                                 <div class="form-group">
                                     <label for="inputUserName" class="control-label col-md-3">Discapacidad </label>
                                     <div class="col-md-8">
                                         <!--<label><input type="checkbox" value="" id="pac_Discapacidad"></label>-->
-                                        <select class="form-control selectpicker" validate="select" id="pac_Discapacidad">
+                                        <select class="form-control selectpicker"  id="pac_Discapacidad">
                                             <option value="1">Ninguna</option>
                                             <option value="2">Discapacidad fìsica</option>
                                             <option value="3">Discapacidad intelectual</option>
@@ -386,6 +368,6 @@
         </div>
     </div>
 </div>
-<script src="resources/js/configuracionInicial.js" type="text/javascript" ></script> 
+<!--<script src="resources/js/configuracionInicial.js" type="text/javascript" ></script> -->
 <script src="paciente/js/paciente.js" type="text/javascript"></script>
 <script src="paciente/js/stylePaciente.js" type="text/javascript"></script>

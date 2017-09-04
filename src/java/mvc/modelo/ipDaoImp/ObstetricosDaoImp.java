@@ -62,7 +62,7 @@ public class ObstetricosDaoImp implements ObstetricosDao {
         String sql = "";
         try {
             if (value.getId() == 0) {
-                sql = "INSERT INTO [dbo].[obstetricos]([fpp],[gestas],[abortos],[partos],[cesareas],[nacidosVivos],[nacidosMuertos],[hijosVivos],[muertos],[observaciones],[idPaciente])\n"
+                sql = "INSERT INTO [dbo].[obstetricos]([fpp],[gestas],[abortos],[partos],[cesareas],[nacidosVivos],[nacidosMuertos],[hijosVivos],[muertos],[idPaciente])\n"
                         + "     VALUES\n"
                         + "           ('" + test.test.SQLSave(value.getFpp()) + "'\n"
                         + "           ," + value.getGestas() + "\n"
@@ -73,7 +73,6 @@ public class ObstetricosDaoImp implements ObstetricosDao {
                         + "           ," + value.getNacidosMuertos() + "\n"
                         + "           ," + value.getHijosVivos() + "\n"
                         + "           ," + value.getMuertos() + "\n"
-                        + "           ,'" + value.getObservaciones() + "'\n"
                         + "           ," + value.getIdPaciente().getId() + ")";
             } else {
                 sql = "UPDATE [dbo].[obstetricos]\n"
@@ -86,12 +85,10 @@ public class ObstetricosDaoImp implements ObstetricosDao {
                         + "      ,[nacidosMuertos] = " + value.getNacidosMuertos() + "\n"
                         + "      ,[hijosVivos] = " + value.getHijosVivos() + "\n"
                         + "      ,[muertos] = " + value.getMuertos() + "\n"
-                        + "      ,[observaciones] = " + value.getObservaciones() + "\n"
-                        + "      ,[idPaciente] = " + value.getIdPaciente().getId() + "\n"
                         + " WHERE id = " + value.getId();
+                        
             }
             conn.execute(sql);
-            System.out.println(sql);
             return true;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -125,7 +122,6 @@ public class ObstetricosDaoImp implements ObstetricosDao {
                 value.setHijosVivos(rs.getInt("hijosVivos"));
                 value.setMuertos(rs.getInt("muertos"));
                 value.setObservaciones(rs.getString("observaciones"));
-                value.setIdPaciente(new Paciente(rs.getInt("idPaciente")));
 
             }
         } catch (SQLException ex) {

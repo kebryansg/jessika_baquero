@@ -151,9 +151,8 @@ public class sPaciente extends HttpServlet {
             case "edit":
                 paciente = new PacienteDaoImp().edit(Integer.parseInt(request.getParameter("id")));
                 Obstetricos obs = new ObstetricosDaoImp().edit_idPaciente(paciente.getId());
-                List<ParienteEnfermedadPaciente> list = new ParienteEnfermedadPacienteDaoImp().list_Paciente(paciente.getId());
                 out = response.getWriter();
-                result = "{\"paciente\": " + gson.toJson(paciente) + ",\"obs\": " + gson.toJson(obs) + ",\"list\": " + gson.toJson(list) + "}";
+                result = "{\"paciente\": " + gson.toJson(paciente) + ",\"obs\": " + gson.toJson(obs) + "}";
                 out.print(result);
                 out.flush();
                 out.close();
@@ -189,8 +188,8 @@ public class sPaciente extends HttpServlet {
 
                 new PacienteDaoImp().save(paciente);
 
-                if (paciente.getId() > 0) {
-                    if (paciente.getSexo().equals("0")) {
+                if (paciente.getId() != 0) {
+                    if (paciente.getSexo().equals("2")) {
                         Obstetricos obstetricos = new Obstetricos(Integer.parseInt(request.getParameter("paciente[idObs]")));
                         obstetricos.setGestas(Integer.parseInt(request.getParameter("paciente[gestacion]")));
                         obstetricos.setAbortos(Integer.parseInt(request.getParameter("paciente[abortos]")));
@@ -201,12 +200,11 @@ public class sPaciente extends HttpServlet {
                         obstetricos.setMuertos(Integer.parseInt(request.getParameter("paciente[hijosMuertos]")));
                         obstetricos.setNacidosMuertos(Integer.parseInt(request.getParameter("paciente[nacidoMuerto]")));
                         obstetricos.setNacidosVivos(Integer.parseInt(request.getParameter("paciente[nacidoVivo]")));
-                        obstetricos.setObservaciones("");
+                        //obstetricos.setObservaciones("");
                         obstetricos.setPartos(Integer.parseInt(request.getParameter("paciente[partos]")));
                         new ObstetricosDaoImp().save(obstetricos);
                     }
                     result = "{\"status\" : \"ok\", \"id\" : \""+ paciente.getCedula()+"\" }";
-                    System.out.println(result);
                 } else if (paciente.getId() == -1) {
                     result = "{\"status\" : \"cedula\"}";
                 }

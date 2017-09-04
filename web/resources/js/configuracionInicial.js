@@ -21,5 +21,5 @@ $('.form_time').datetimepicker({
     maxView: 1,
     forceParse: 0
 });
-$(".date-mask").inputmask();
+
 $(".selectpicker").selectpicker().selectpicker("render");

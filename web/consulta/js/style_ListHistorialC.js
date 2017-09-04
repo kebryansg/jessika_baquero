@@ -12,44 +12,38 @@ opts_pag_tbHC = {
         obtList(false, page);
     }
 };
+$("#tbHC").on("click", "button[name='btnHCaso']", function () {
+    viewHistorialCaso($(this).attr("data-id"));
+});
+$("#tbHC").on("click", "button[name='btnNewConsulta']", function () {
+
+    addHistorialCaso($(this).attr("data-id"));
+});
 
 $("#btn_paciente_reg").click(function () {
     $("#contenido").load("paciente/paciente.jsp", function () {
-        $("#savePaciente").data("return", 1);
+        setReturn(3);
     });
 });
 
-$("#tb_ViewHC").bootstrapTable({
-    contextMenu: '#tb_ViewHC-context-menu',
-    onContextMenuItem: function (row, $el) {
-        switch ($el.data("item")) {
-            case "view":
-                $('#viewHistorialCaso').modal('toggle');
-                $('#viewHistorialCaso').on({
-                    'hidden.bs.modal': function () {
-                        $("#contenido").load("consulta/viewConsulta.jsp", function () {
-                            editConsulta(row.id);
-                        });
-                    }
-                });
-                break;
-        }
-    }
+$("#tb_ViewHC").on('dbl-click-row.bs.table', function (e, row, $element) {
+    viewConsulta(row.id);
 });
 
-$("#tbHC").bootstrapTable({
-    contextMenu: '#tbHc-context-menu',
-    onContextMenuItem: function (row, $el) {
-        switch ($el.data("item")) {
-            case "new":
-                addHistorialCaso(row.caso);
-                break;
-            case "view":
-                viewHistorialCaso(row.caso);
-                break;
-        }
-    }
-});
+$("#tb_ViewHC").bootstrapTable();
+$("#tbHC").bootstrapTable(/*{
+ contextMenu: '#tbHc-context-menu',
+ onContextMenuItem: function (row, $el) {
+ switch ($el.data("item")) {
+ case "new":
+ addHistorialCaso(row.caso);
+ break;
+ case "view":
+ viewHistorialCaso(row.caso);
+ break;
+ }
+ }
+ }*/);
 
 $("#cboH_Caso").selectpicker();
 
@@ -108,11 +102,21 @@ function viewHistorialCaso(idCaso) {
             op: "detCaso"
         },
         success: function (data) {
-            console.log(data);
             $("#viewHistorialCaso table").bootstrapTable('load', data);
         }
     });
     $('#viewHistorialCaso').modal("show");
+}
+
+function viewConsulta(id) {
+    $('#viewHistorialCaso').modal('toggle');
+    $('#viewHistorialCaso').on({
+        'hidden.bs.modal': function () {
+            $("#contenido").load("consulta/viewConsulta.jsp", function () {
+                editConsulta(id);
+            });
+        }
+    });
 }
 
 function addHistorialCaso(idCaso) {

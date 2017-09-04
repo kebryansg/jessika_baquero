@@ -1,8 +1,12 @@
-
+return_dir = 1;
+function setReturn(val) {
+    return_dir = val;
+}
 $(function () {
-
-    $('.form_date').datetimepicker('update', new Date());
-    $('.form_date').datetimepicker('setEndDate', new Date());
+    $("#savePaciente").data("id", 0);
+    $("#tabObstetricia").data("id", 0);
+    $(".selectpicker").selectpicker();
+    $(".date-mask").inputmask();
 
     $("#contenido").on("changed.bs.select", "#cboProvincia", function (e) {
         change_cboProvincia(this);
@@ -12,14 +16,13 @@ $(function () {
         change_cboCanton(this);
     });
 
-
-
     $("#contenido").on("change", "#pac_Genero", function (e) {
         change_Genero(this);
     });
-    $('#pac_nacionalidad').on('changed.bs.select', function (e, newValue) {
+    $('#pac_nacionalidad').on('changed.bs.select', function (e) {
+        newValue = $('#pac_nacionalidad').selectpicker("val");
         switch (newValue) {
-            case 1:
+            case "1":
                 $("#pac_PaisNac").val("Ecuador");
                 break;
             default :
@@ -30,33 +33,35 @@ $(function () {
 
     $("#savePaciente").click(function (e) {
         var id = $("#savePaciente").data("id");
-        if (isNull(id)) {
-            save();
-            if($("#savePaciente").data("return") === 1){
-                id_cedula = $("#savePaciente").data("id"),
-                $("#contenido").load("consulta/ListHistorialC.jsp",function(){
-                    load_Paciente(id_cedula);
-                });
-            }
-        } else {
-            editSave(id);
+        if (save()) {
+            dir();
         }
     });
     $("#cancelPaciente").click(function (e) {
-        if ($(this).data("id") === 0 || isNull($(this).data("id"))) {
-            limpiarPaciente();
-        } else {
-            $("#contenido").load("paciente/listPacientes.jsp");
-        }
-
+        dir();
     });
-    $('#pac_nacionalidad').selectpicker("val", 1);
-    $("#pac_PaisNac").val("Ecuador");
-    var utc = new Date().toJSON().slice(0,10);//.replace(/-/g,'/');
+
+    var utc = new Date().toJSON().slice(0, 10);
     $("#pac_FPP").val(utc);
-    
 
 });
+
+function dir() {
+    switch (return_dir) {
+        case 1:
+            limpiarPaciente();
+            break;
+        case 2:
+            $("#contenido").load("paciente/listPacientes.jsp");
+            break;
+        case 3:
+            id_cedula = $("#savePaciente").data("cedula");
+            $("#contenido").load("consulta/ListHistorialC.jsp", function () {
+                load_Paciente(id_cedula);
+            });
+            break;
+    }
+}
 
 function change_cboProvincia(cbo) {
     $.ajax({

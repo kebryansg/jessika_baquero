@@ -77,14 +77,13 @@ public class test {
     public static String nvar(String frase) {
         String[] elem = clear_filter(frase).split(" ");
         for (int i = 0; i < elem.length; i++) {
-            elem[i] = "\"" + elem[i] + "\"";
+            elem[i] = "\"" + elem[i] + "*\"";
         }
         String[] elem_r = new String[elem.length];
         int indice = 0;
         for (int i = (elem.length - 1); i >= 0; i--) {
             elem_r[indice++] = elem[i];
         }
-        //System.out.println(String.join(" near ", elem) + " or " + String.join(" near ", elem_r));
         return String.join(" near ", elem) + " or " + String.join(" near ", elem_r);
     }
 

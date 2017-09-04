@@ -85,7 +85,8 @@ public class CasoDaoImp implements CasoDao {
                         + "\"fecha\" : \" " + test.test.SQLSave(rs.getDate("fecha")) + " \", "
                         + "\"diagnostico\" : \" " + rs.getString("diagnostico") + " \", "
                         + "\"especialidad\" : \" " + rs.getString("especialidad") + " \", "
-                        + "\"tipoConsulta\" : \" " + rs.getString("tipoConsulta") + " \" "
+                        + "\"tipoConsulta\" : \" " + rs.getString("tipoConsulta") + " \", "
+                        + "\"accion\" : \" <button data-toggle='tooltip' title='Mostrar Historial del Caso' data-placement='left' name='btnHCaso' data-id='"+ rs.getInt("caso") +"' class='btn btn-info'><i class='fa fa-table'></i></button> <button name='btnNewConsulta' data-id='"+ rs.getInt("caso") +"' data-toggle='tooltip' title='Agregar consulta al caso' data-placement='left' class='btn btn-info'><i class='fa fa-plus'></i></button>\" "
                         + "}");
             }
             l.setList(list);

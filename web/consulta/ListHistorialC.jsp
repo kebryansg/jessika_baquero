@@ -56,7 +56,7 @@
     </div>
     <br>
     <!-- context menu -->
-    <ul id="tbHc-context-menu" class="dropdown-menu" >
+    <ul id="tbHc-context-menu" class="dropdown-menu">
         <li data-item="new"><a><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Nuevo Consulta</a></li>
         <li data-item="view"><a><i class="fa fa-table fa-fw" aria-hidden="true"></i>&nbsp; Detalle del caso</a></li>
     </ul>
@@ -72,6 +72,7 @@
                             <th data-field="diagnostico">Diagnostico</th>
                             <th data-field="especialidad">Especialidad</th>
                             <th data-field="tipoConsulta">Tipo Consulta</th>
+                            <th data-field="accion">Acción</th>
                         </tr>
                     </thead>
                 </table>
@@ -113,8 +114,8 @@
                 <table data-toggle="table" data-height="300" id="tb_ViewHC">
                     <thead>
                         <tr>
-                            <th data-field="id" data-align="center">ID</th>
-                            <th data-field="caso">Caso</th>
+                            <th data-field="id" data-align="center">Cod.</th>
+                            <!--<th data-field="caso">Caso</th>-->
                             <th data-field="fecha">Fecha</th>
                             <th data-field="tipo">Tipo Consulta</th>
                             <th data-field="motivo">Causa - Motivo</th>
