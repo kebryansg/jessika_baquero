@@ -71,7 +71,7 @@
                             <th data-field="diagnostico">Diagnostico</th>
                             <th data-field="especialidad">Especialidad</th>
                             <th data-field="tipoConsulta">Tipo Consulta</th>
-                            <th data-field="accion">Acción</th>
+                            <th class="col-md-2" data-field="accion">Acción</th>
                         </tr>
                     </thead>
                 </table>

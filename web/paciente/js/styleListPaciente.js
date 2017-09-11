@@ -14,7 +14,7 @@ $('#cboFilter').on('changed.bs.select', function (e) {
             $("#txt_filterPaciente").addClass("solo-numero");
             break;
     }
-    loadList(true, 1);
+    loadList(1);
 
 });
 $("#tablPaciente").bootstrapTable({
@@ -57,15 +57,11 @@ defaultOpts = {
     first: "&larrb;",
     prev: "&laquo;",
     next: "&raquo;",
-    last: "&rarrb;",
-    onPageClick: function (event, page) {
-        loadList(false, page);
-    }
+    last: "&rarrb;"
 };
 
 
-function loadList(bandera, pag) {
-    ojb_return = null;
+function loadList(pag) {
     txt_filter = $("#txt_filterPaciente").val();
     op_filter = $("#cboFilter").selectpicker("val");
     cantList = $("#cantList").val();
@@ -84,21 +80,18 @@ function loadList(bandera, pag) {
         success: function (obj) {
             $totalPages = obj.count / cantList;
             $totalPages = Math.ceil($totalPages);
-            $totalPages = ($totalPages === 0) ? 1 : ($totalPages);
-            if (bandera) {
-                modif_Paginacion($totalPages);
-            }
+
             $("#tablPaciente").bootstrapTable('load', obj.list);
-            $('#tablPaciente').bootstrapTable('resetView');
+            $('#pagination-demo').twbsPagination('destroy');
+            $('#pagination-demo').twbsPagination($.extend({}, defaultOpts, {
+                startPage: pag,
+                totalPages: $totalPages,
+                onPageClick: function (event, page) {
+                    loadList(page);
+                }
+            }));
         }
     });
-}
-function modif_Paginacion(total) {
-    $('#pagination-demo').twbsPagination('destroy');
-    console.log(defaultOpts);
-    $('#pagination-demo').twbsPagination($.extend({}, defaultOpts, {
-        totalPages: total
-    }));
 }
 
 function editPaciente(idPaciente) {
@@ -109,7 +102,7 @@ function editPaciente(idPaciente) {
 
 function deletePaciente(idPaciente) {
     deletPaciente(idPaciente);
-    loadList(true, 1);
+    loadList(1);
 }
 
 $(function () {
@@ -117,12 +110,12 @@ $(function () {
     $("#cantList").selectpicker();
 
     $('#pagination-demo').twbsPagination(defaultOpts);
-    loadList(true, 1);
+    loadList(1);
     $("#tablPaciente").bootstrapTable('hideColumn', 'sexo');
     $("#tablPaciente").bootstrapTable('hideColumn', 'id');
 
     $("#contenido").on("change", "#cantList", function () {
-        loadList(true, 1);
+        loadList(1);
     });
 
     $("#contenido").on("keyup", "#txt_filterPaciente", function (e) {
@@ -130,12 +123,12 @@ $(function () {
             case 8:
                 if ($.isEmptyObject($(this).val()) && cont_vacio === 0) {
                     cont_vacio = 1;
-                    loadList(true, 1);
+                    loadList(1);
                 }
                 break;
             case 13:
                 cont_vacio = 0;
-                loadList(true, 1);
+                loadList(1);
                 break;
             default :
                 cont_vacio = 0;
